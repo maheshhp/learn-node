@@ -1,10 +1,7 @@
-let addCLArgs = (...args) => {
-  console.log(args);
-  if (args.length === 0) {
-    console.log(undefined);
-  } else {
-    let addedArgs = args.reduce((accumulate, element) => accumulate + element);
-    console.log(addedArgs);
-  }
+let addCLArgs = () => {
+  let addedArgs = process.argv.slice(2);
+  console.log(addedArgs.map(stringArg => Number(stringArg))
+    .reduce((accumulate, element) => accumulate + element));
 };
+addCLArgs();
 module.exports = addCLArgs;
