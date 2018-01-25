@@ -1,15 +1,25 @@
 const accessFileAsync = require('./solution');
 
-describe('Tests for checking the log of newline characters by the function that reads the contents of the file using callback specified in the command line argument', () => {
-  test('Verify error code written to the console for no file found', () => {
-    accessFileAsync('/Users/maheshhp/Downloads/learnyounode/ExerciseThree/testMe.txt');
-    expect(accessFileAsync('/Users/maheshhp/Downloads/learnyounode/ExerciseThree/testMe.txt')).toMatch('ENOENT');
+describe('Tests for checking the log of newline characters by the function that reads the contents of the file using callback specified', () => {
+  test('Verify error code written to the console for no file found', (done) => {
+    let callback = (data) => {
+      expect(data).toBe('ENOENT');
+      done();
+    };
+    accessFileAsync('/Users/maheshhp/Downloads/learnyounode/ExerciseThree/testMe.txt', callback);
   });
-  test('Verify log for file with no newline characters', () => {
-    accessFileAsync('/Users/maheshhp/Downloads/learnyounode/ExerciseThree/test.txt');
-    expect(accessFileAsync('/Users/maheshhp/Downloads/learnyounode/ExerciseThree/test.txt')).toMatch('0');
+  test('Verify return value for file with no newline characters', (done) => {
+    let callback = (data) => {
+      expect(data).toBe(0);
+      done();
+    };
+    accessFileAsync('/Users/maheshhp/Downloads/learnyounode/ExerciseThree/test.txt', callback);
   });
-  test('Verify log for file with 5 newline characters', () => {
-    expect(accessFileAsync('/Users/maheshhp/Downloads/learnyounode/ExerciseThree/testFive.txt')).toMatch('5');
+  test('Verify return value for file with 5 newline characters', (done) => {
+    let callback = (data) => {
+      expect(data).toBe(5);
+      done();
+    };
+    accessFileAsync('/Users/maheshhp/Downloads/learnyounode/ExerciseThree/testFive.txt', callback);
   });
 });

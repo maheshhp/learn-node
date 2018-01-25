@@ -1,12 +1,11 @@
 const fs = require('fs');
 
-let accessFileAsync = (arg) => {
-  fs.readFile(arg, 'utf8', (error, fileContent) => {
+let accessFileAsync = (filepath, testCallback) => {
+  fs.readFile(filepath, 'utf8', (error, fileContent) => {
     if (error) {
-      console.log(error.code);
-    } else {
-      console.log(fileContent.split('\n').length - 1);
+      return testCallback(error.code);
     }
+    return testCallback(fileContent.split('\n').length - 1);
   });
 };
 
