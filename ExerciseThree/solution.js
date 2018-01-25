@@ -1,7 +1,9 @@
 const fs = require('fs');
 
-let accessFile = (arg) => {
-  let fileContentNewLines = fs.readFileSync(arg, 'utf8').split('\n').length;
+let accessFile = () => {
+  let fileContentNewLines = fs.readFileSync(process.argv[2], 'utf8').split('\n').length - 1;
   console.log(fileContentNewLines);
 };
+
+accessFile();
 module.exports = accessFile;

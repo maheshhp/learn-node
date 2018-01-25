@@ -9,12 +9,12 @@ describe('Tests for checking the log of newline characters by the function that 
   test('Verify error thrown for no file found', () => {
     expect(() => accessFile('/Documents/newTest.txt')).toThrowError('ENOENT: no such file or directory, open \'/Documents/newTest.txt\'');
   });
-  test('Verify log for file with no content for newline characters', () => {
+  test('Verify log for file with no newline characters', () => {
     accessFile('/Users/maheshhp/Downloads/learnyounode/ExerciseThree/test.txt');
-    expect(global.console.log).toHaveBeenCalledWith(1);
+    expect(global.console.log).toHaveBeenCalledWith(0);
   });
   test('Verify log for file with 5 newline characters', () => {
     accessFile('/Users/maheshhp/Downloads/learnyounode/ExerciseThree/testFive.txt');
-    expect(global.console.log).toHaveBeenCalledWith(6);
+    expect(global.console.log).toHaveBeenCalledWith(5);
   });
 });
