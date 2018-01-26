@@ -1,25 +1,25 @@
 const http = require('http');
 
-let accessHTTPAsync = () => {
-  let getURL = process.argv[2];
+let accessHTTPAsync = (getURL, testCallback) => {
+  // let getURL = process.argv[2];
   http.get(getURL, (response) => {
     response.setEncoding('UTF8');
     let retData = [];
     response.on('data', (data) => {
       retData.push(data);
       // console.log(data);
-      // testCallback('DATA');
+      testCallback('DATA');
     });
     response.on('end', (end) => {
       // console.log(end);
-      // testCallback('END');
+      testCallback('END');
       retData.forEach(data => console.log(data));
     });
     response.on('error', (error) => {
       console.log(error);
-      // testCallback('ERROR');
+      testCallback('ERROR');
     });
   });
 };
-accessHTTPAsync();
+// accessHTTPAsync();
 module.exports = accessHTTPAsync;
