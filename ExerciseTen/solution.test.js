@@ -21,6 +21,7 @@ describe('Tests for checking the date and time data received from the TCP server
       console.log('Connection closed');
       let strftimeIT = strftime.localizeByIdentifier('en_US');
       expect(timeData).toMatch(strftimeIT('%Y-%m-%d %k:%M').toString());
+      console.log(timeData);
       done();
     });
   });
