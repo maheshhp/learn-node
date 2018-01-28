@@ -16,6 +16,7 @@
     "jest": "^22.1.4"
   },
   "dependencies": {
+    "http-shutdown": "^1.2.0",
     "strftime": "^0.10.0"
   }
 }
