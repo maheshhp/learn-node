@@ -15,38 +15,37 @@ let requestOptions = {
 };
 
 let invalidRequestOptions = {
-  url: 'http://127.0.0.1:9000',
-  method: 'POST',
+  url: 'http://127.0.0.1:8000',
+  method: 'GET',
   headers: requestHeader,
   form: '1234',
 };
 
 describe('Tests for valid and invalid string in request body', () => {
+  getPOSTArgs(8000);
   test('Verify the HTML data received from the HTTP server on request', (done) => {
     let retData = '';
-    getPOSTArgs(8000);
+    // getPOSTArgs(8000);
     request(requestOptions, (error, response, body) => {
       if (!error && response.statusCode === 200) {
         retData += body;
         expect(retData).toMatch('HELLOWORLD');
       } else {
-        expect(retData).toMatch('ERROR');
+        expect(retData).toMatch('Not a valid POST request\n');
       }
-      stopResponseServer(8000);
       done();
     });
   });
-  test('Verify the HTML data received from the HTTP server on request', (done) => {
+  test('Verify the HTML data received from the HTTP server on an invalid request', (done) => {
     let retData = '';
-    getPOSTArgs(9000);
     request(invalidRequestOptions, (error, response, body) => {
       if (!error && response.statusCode === 200) {
         retData += body;
-        expect(retData).toMatch('1234');
+        expect(retData).toMatch('Not a valid POST request\n');
       } else {
-        expect(retData).toMatch('ERROR');
+        expect(retData).toMatch('Error');
       }
-      stopResponseServer(9000);
+      stopResponseServer();
       done();
     });
   });
