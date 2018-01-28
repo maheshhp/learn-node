@@ -7,12 +7,12 @@ const http = require('http');
 
 describe('Tests for checking the time parse helper function', () => {
   test('Verify the parsed data received for iso time return type', (done) => {
-    let stdIsoData = {
-      hour: 14,
-      minute: 23,
-      second: 15,
-    };
-    expect(parseIsoTime('2013-08-10T12:10:15.474Z', 'Iso')).toEqual(stdIsoData);
+    let getNowTime = new Date('2013-08-10T12:10:15.474Z');
+    expect(parseIsoTime('2013-08-10T12:10:15.474Z', 'Iso')).toEqual({
+      hour: getNowTime.getHours(),
+      minute: getNowTime.getMinutes(),
+      second: getNowTime.getSeconds(),
+    });
     done();
   });
   test('Verify the parsed data received for unix time return type', (done) => {
@@ -20,6 +20,10 @@ describe('Tests for checking the time parse helper function', () => {
       unixtime: 1376136615474,
     };
     expect(parseIsoTime('2013-08-10T12:10:15.474Z', 'Unix')).toEqual(stdUnixData);
+    done();
+  });
+  test('Verify the data received for invalid type', (done) => {
+    expect(parseIsoTime('2013-08-10T12:10:15.474Z', 'Win')).toMatch('Invalid format specified');
     done();
   });
 });

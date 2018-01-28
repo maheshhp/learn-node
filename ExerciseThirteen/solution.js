@@ -17,7 +17,21 @@ let stopHTTPServer = () => {
 // Arguments: dateTimeValue string, Iso/Unix format specifier
 // Returns: json with parsed values
 let parseIsoTime = (dateTimeValue, format) => {
-// Returns JSON based on format or error string
+  let parsedDateTime = {};
+  if (format === 'Iso') {
+    parsedDateTime = new Date(dateTimeValue);
+    return {
+      hour: parsedDateTime.getHours(),
+      minute: parsedDateTime.getMinutes(),
+      second: parsedDateTime.getSeconds(),
+    };
+  } else if (format === 'Unix') {
+    parsedDateTime = new Date(dateTimeValue);
+    return {
+      unixtime: parsedDateTime.getTime(),
+    };
+  }
+  return 'Invalid format specified';
 };
 
 let startNodeServer = (port) => {
