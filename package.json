@@ -17,6 +17,8 @@
   },
   "dependencies": {
     "http-shutdown": "^1.2.0",
-    "strftime": "^0.10.0"
+    "request": "^2.83.0",
+    "strftime": "^0.10.0",
+    "through2-map": "^3.0.0"
   }
 }
