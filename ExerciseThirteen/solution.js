@@ -63,5 +63,5 @@ let startNodeServer = (port) => {
   server.listen(port);
 };
 
-// startNodeServer(process.argv[2]);
+startNodeServer(process.argv[2]);
 module.exports = { startNodeServer, stopHTTPServer, parseIsoTime };
