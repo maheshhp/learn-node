@@ -1,5 +1,6 @@
 const http = require('http');
 const httpShutdown = require('http-shutdown'); // Required to gracefully shutdown the server after the first response
+const url = require('url');
 
 let serverObject = null;
 
@@ -36,7 +37,26 @@ let parseIsoTime = (dateTimeValue, format) => {
 
 let startNodeServer = (port) => {
   let server = http.createServer((request, response) => {
-
+    let parsedURL = url.parse(request.url, true);
+    let timeString = parsedURL.query.iso;
+    let parsedTime = 'Invalid request format';
+    if (parsedURL.pathname === '/api/parsetime') {
+      parsedTime = parseIsoTime(timeString, 'Iso');
+      if (isNaN(parsedTime.hour)) {
+        parsedTime = 'Invalid input date-time value';
+      } else {
+        parsedTime = JSON.stringify(parsedTime);
+      }
+    } else if (parsedURL.pathname === '/api/unixtime') {
+      parsedTime = parseIsoTime(timeString, 'Unix');
+      if (isNaN(parsedTime.unixtime)) {
+        parsedTime = 'Invalid input date-time value';
+      } else {
+        parsedTime = JSON.stringify(parsedTime);
+      }
+    }
+    response.writeHead(200, { 'Content-Type': 'application/json' });
+    response.end(parsedTime);
   });
   server = (httpShutdown)(server);
   serverObject = server;

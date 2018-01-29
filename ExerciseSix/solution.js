@@ -1,4 +1,5 @@
 const fs = require('fs');
+const path = require('path');
 
 let accessDirAsync = (dirPath, fileType, printCallback) => {
   fs.readdir(dirPath, 'utf8', (error, fileList) => {
@@ -6,7 +7,7 @@ let accessDirAsync = (dirPath, fileType, printCallback) => {
       return printCallback(error);
     }
     let retrievedFiles = fileList
-      .filter(filename => filename.includes(`.${fileType}`));
+      .filter(filename => path.extname(filename) === `.${fileType}`);
     return printCallback(null, retrievedFiles);
   });
 };
