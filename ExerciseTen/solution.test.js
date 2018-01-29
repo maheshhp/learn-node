@@ -20,7 +20,7 @@ describe('Tests for checking the date and time data received from the TCP server
     client.on('close', () => {
       console.log('Connection closed');
       let strftimeIT = strftime.localizeByIdentifier('en_US');
-      expect(timeData).toMatch(strftimeIT('%Y-%m-%d %k:%M').toString());
+      expect(timeData).toMatch(strftimeIT('%Y-%m-%d %H:%M').toString());
       console.log(timeData);
       done();
     });
