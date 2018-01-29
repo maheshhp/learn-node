@@ -1,4 +1,5 @@
 const fs = require('fs');
+const path = require('path');
 
 let accessDirAsync = (dirPath, fileType, testCallback) => {
   // let dirPath = process.argv[2];
@@ -8,7 +9,7 @@ let accessDirAsync = (dirPath, fileType, testCallback) => {
       return testCallback(error.code);
     }
     let retrievedFiles = fileList
-      .filter(filename => filename.includes(`.${fileType}`));
+      .filter(filename => path.extname(filename) === `.${fileType}`);
     return testCallback(retrievedFiles);
   });
 };
